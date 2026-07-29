@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产品宣传落地页</title>
+    <style>
+        /* ========== Reset & Base ========== */
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --primary:#2563eb;
+            --primary-dark:#1d4ed8;
+            --accent:#f59e0b;
+            --text:#1e293b;
+            --text-light:#64748b;
+            --bg:#f8fafc;
+            --white:#ffffff;
+            --radius:16px;
+            --shadow:0 4px 24px rgba(0,0,0,.08);
+            --shadow-lg:0 12px 40px rgba(0,0,0,.12);
+        }
+        body{
+            font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+            color:var(--text);
+            background:var(--bg);
+            line-height:1.7;
+            -webkit-font-smoothing:antialiased;
+        }
+        a{color:var(--primary);text-decoration:none}
+        img{max-width:100%;display:block}
+
+        /* ========== Hero Section ========== */
+        .hero{
+            background:linear-gradient(135deg,#2563eb 0%,#7c3aed 50%,#9333ea 100%);
+            color:var(--white);
+            padding:60px 20px 70px;
+            text-align:center;
+            position:relative;
+            overflow:hidden;
+        }
+        .hero::before{
+            content:"";
+            position:absolute;
+            top:-50%;left:-50%;
+            width:200%;height:200%;
+            background:radial-gradient(circle at 30% 40%,rgba(255,255,255,.08) 0%,transparent 50%);
+            pointer-events:none;
+        }
+        .hero-content{position:relative;max-width:600px;margin:0 auto}
+        .hero-badge{
+            display:inline-block;
+            background:rgba(255,255,255,.18);
+            backdrop-filter:blur(8px);
+            padding:6px 18px;
+            border-radius:50px;
+            font-size:13px;
+            font-weight:500;
+            margin-bottom:20px;
+            letter-spacing:.5px;
+        }
+        .hero h1{
+            font-size:32px;
+            font-weight:800;
+            line-height:1.3;
+            margin-bottom:16px;
+            letter-spacing:-.5px;
+        }
+        .hero p{
+            font-size:17px;
+            opacity:.9;
+            margin-bottom:28px;
+            max-width:480px;
+            margin-left:auto;margin-right:auto;
+        }
+        .hero-cta{
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            background:var(--white);
+            color:var(--primary);
+            font-size:16px;
+            font-weight:700;
+            padding:14px 36px;
+            border-radius:50px;
+            box-shadow:0 8px 24px rgba(0,0,0,.2);
+            transition:transform .2s,box-shadow .2s;
+        }
+        .hero-cta:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.25)}
+        .hero-cta:active{transform:translateY(0)}
+
+        /* ========== Section Common ========== */
+        .section{padding:56px 20px;max-width:680px;margin:0 auto}
+        .section-title{
+            text-align:center;
+            font-size:24px;
+            font-weight:700;
+            margin-bottom:8px;
+        }
+        .section-subtitle{
+            text-align:center;
+            color:var(--text-light);
+            font-size:15px;
+            margin-bottom:36px;
+        }
+
+        /* ========== Features Cards ========== */
+        .features{display:grid;gap:16px}
+        .feature-card{
+            background:var(--white);
+            border-radius:var(--radius);
+            padding:28px 24px;
+            box-shadow:var(--shadow);
+            display:flex;
+            gap:16px;
+            align-items:flex-start;
+            transition:transform .2s,box-shadow .2s;
+        }
+        .feature-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+        .feature-icon{
+            width:52px;height:52px;
+            border-radius:14px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:24px;
+            flex-shrink:0;
+        }
+        .feature-icon.blue{background:#dbeafe;color:#2563eb}
+        .feature-icon.amber{background:#fef3c7;color:#d97706}
+        .feature-icon.green{background:#d1fae5;color:#059669}
+        .feature-icon.purple{background:#ede9fe;color:#7c3aed}
+        .feature-body h3{font-size:17px;font-weight:700;margin-bottom:6px}
+        .feature-body p{font-size:14px;color:var(--text-light)}
+
+        /* ========== Stats ========== */
+        .stats{
+            background:var(--white);
+            border-radius:var(--radius);
+            padding:32px 20px;
+            display:flex;
+            justify-content:space-around;
+            box-shadow:var(--shadow);
+            margin:0 20px;
+        }
+        .stat{text-align:center}
+        .stat-num{font-size:28px;font-weight:800;color:var(--primary)}
+        .stat-label{font-size:13px;color:var(--text-light);margin-top:4px}
+
+        /* ========== Pricing ========== */
+        .pricing-card{
+            background:var(--white);
+            border-radius:var(--radius);
+            padding:36px 28px;
+            box-shadow:var(--shadow);
+            text-align:center;
+            border:2px solid transparent;
+            transition:border-color .2s;
+        }
+        .pricing-card:hover{border-color:var(--primary)}
+        .pricing-name{font-size:15px;font-weight:600;color:var(--text-light);margin-bottom:8px}
+        .pricing-price{font-size:40px;font-weight:800;color:var(--text);margin-bottom:4px}
+        .pricing-price small{font-size:16px;font-weight:500;color:var(--text-light)}
+        .pricing-desc{font-size:14px;color:var(--text-light);margin-bottom:24px}
+        .pricing-features{text-align:left;margin-bottom:28px;list-style:none}
+        .pricing-features li{
+            padding:8px 0;
+            font-size:14px;
+            border-bottom:1px solid #f1f5f9;
+            display:flex;
+            align-items:center;
+            gap:8px;
+        }
+        .pricing-features li:last-child{border-bottom:none}
+        .pricing-features li::before{content:"✓";color:var(--primary);font-weight:700}
+        .pricing-btn{
+            display:block;
+            background:var(--primary);
+            color:var(--white);
+            font-size:16px;
+            font-weight:700;
+            padding:14px;
+            border-radius:12px;
+            transition:background .2s;
+        }
+        .pricing-btn:hover{background:var(--primary-dark)}
+
+        /* ========== Contact / CTA ========== */
+        .cta-section{
+            background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);
+            color:var(--white);
+            text-align:center;
+            padding:56px 20px;
+        }
+        .cta-section h2{font-size:24px;font-weight:700;margin-bottom:12px}
+        .cta-section p{font-size:15px;opacity:.8;margin-bottom:28px}
+        .cta-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+        .cta-btn{
+            padding:14px 32px;
+            border-radius:50px;
+            font-size:15px;
+            font-weight:600;
+            transition:transform .2s;
+        }
+        .cta-btn:hover{transform:translateY(-2px)}
+        .cta-btn.primary{background:var(--primary);color:var(--white)}
+        .cta-btn.secondary{background:rgba(255,255,255,.12);color:var(--white);border:1px solid rgba(255,255,255,.2)}
+
+        /* ========== QR Section ========== */
+        .qr-section{
+            background:var(--white);
+            text-align:center;
+            padding:48px 20px;
+        }
+        .qr-section h3{font-size:18px;font-weight:700;margin-bottom:8px}
+        .qr-section p{font-size:14px;color:var(--text-light);margin-bottom:20px}
+        .qr-box{
+            display:inline-block;
+            padding:16px;
+            background:var(--white);
+            border-radius:16px;
+            box-shadow:var(--shadow);
+        }
+        .qr-box img{width:180px;height:180px}
+        .qr-tip{font-size:12px;color:var(--text-light);margin-top:12px}
+
+        /* ========== Footer ========== */
+        .footer{
+            background:#0f172a;
+            color:rgba(255,255,255,.5);
+            text-align:center;
+            padding:24px 20px;
+            font-size:13px;
+        }
+
+        /* ========== Mobile ========== */
+        @media(max-width:480px){
+            .hero h1{font-size:26px}
+            .hero p{font-size:15px}
+            .section{padding:40px 16px}
+            .section-title{font-size:21px}
+            .stats{flex-direction:column;gap:16px}
+            .feature-card{padding:20px 16px}
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===================== Hero ===================== -->
+<section class="hero">
+    <div class="hero-content">
+        <span class="hero-badge">✨ 全新升级</span>
+        <h1>你的产品名称</h1>
+        <p>用一句话描述你的产品如何解决用户的核心痛点，让访问者立刻明白价值所在。</p>
+        <a href="#contact" class="hero-cta">立即体验 →</a>
+    </div>
+</section>
+
+<!-- ===================== Stats ===================== -->
+<div class="stats" style="max-width:680px;margin:-36px auto 0;position:relative;z-index:1">
+    <div class="stat">
+        <div class="stat-num">10万+</div>
+        <div class="stat-label">服务用户</div>
+    </div>
+    <div class="stat">
+        <div class="stat-num">99.9%</div>
+        <div class="stat-label">可用性</div>
+    </div>
+    <div class="stat">
+        <div class="stat-num">4.9★</div>
+        <div class="stat-label">用户评分</div>
+    </div>
+</div>
+
+<!-- ===================== Features ===================== -->
+<section class="section" id="features">
+    <h2 class="section-title">核心功能</h2>
+    <p class="section-subtitle">三大核心能力，让工作更高效</p>
+    <div class="features">
+        <div class="feature-card">
+            <div class="feature-icon blue">⚡</div>
+            <div class="feature-body">
+                <h3>功能亮点一</h3>
+                <p>描述这个功能如何帮助用户解决问题，突出效率和便捷性。</p>
+            </div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon amber">🎯</div>
+            <div class="feature-body">
+                <h3>功能亮点二</h3>
+                <p>描述这个功能的核心价值，强调精准匹配用户需求。</p>
+            </div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon green">🔒</div>
+            <div class="feature-body">
+                <h3>功能亮点三</h3>
+                <p>描述安全、稳定或可靠性方面的优势，建立用户信任。</p>
+            </div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon purple">📊</div>
+            <div class="feature-body">
+                <h3>功能亮点四</h3>
+                <p>描述数据洞察或智能分析方面的能力，体现智能化价值。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== Pricing ===================== -->
+<section class="section" id="pricing">
+    <h2 class="section-title">价格方案</h2>
+    <p class="section-subtitle">灵活选择，按需付费</p>
+    <div class="pricing-card">
+        <div class="pricing-name">专业版</div>
+        <div class="pricing-price">&yen;99<small>/月</small></div>
+        <div class="pricing-desc">适合个人和小型团队使用</div>
+        <ul class="pricing-features">
+            <li>全部核心功能</li>
+            <li>10GB 存储空间</li>
+            <li>7×12 在线客服</li>
+            <li>不限使用次数</li>
+            <li>优先功能更新</li>
+        </ul>
+        <a href="#contact" class="pricing-btn">立即开通</a>
+    </div>
+</section>
+
+<!-- ===================== CTA ===================== -->
+<section class="cta-section" id="contact">
+    <h2>准备好了吗？</h2>
+    <p>立即开始，体验不一样的产品服务</p>
+    <div class="cta-buttons">
+        <a href="tel:400-000-0000" class="cta-btn primary">📞 电话咨询</a>
+        <a href="mailto:contact@example.com" class="cta-btn secondary">✉ 邮件联系</a>
+    </div>
+</section>
+
+<!-- ===================== QR Code ===================== -->
+<section class="qr-section">
+    <h3>📱 扫码了解更多</h3>
+    <p>保存二维码，随时查看最新信息</p>
+    <div class="qr-box">
+        <img src="qr_code.png" alt="二维码">
+    </div>
+    <p class="qr-tip">扫描二维码在手机上查看本页面</p>
+</section>
+
+<!-- ===================== Footer ===================== -->
+<footer class="footer">
+    <p>© 2026 你的公司名称 · 保留所有权利</p>
+</footer>
+
+</body>
+</html>
